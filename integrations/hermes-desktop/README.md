@@ -17,6 +17,9 @@ DESKTOP=/path/to/hermes-desktop
 patch -d "$DESKTOP" -p1 < patches/memory-graphnosis-i18n.patch
 patch -d "$DESKTOP" -p1 < patches/MemoryProviders-graphnosis.patch
 
+# Register graphnosis in the known-providers map (so the description key resolves)
+patch -d "$DESKTOP" -p1 < patches/memory-provider-known-map.patch
+
 # Capabilities → MCP Servers: one-click install card + Graphnosis download
 patch -d "$DESKTOP" -p1 < patches/tools-graphnosis-mcp-card.patch
 
