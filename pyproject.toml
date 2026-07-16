@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hermes-graphnosis"
+version = "1.0.0"
+description = "Graphnosis local encrypted memory provider for Hermes Agent (standalone plugin)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Nelu Lazar", email = "interactivellc@nehloo.com" }]
+keywords = ["hermes", "hermes-agent", "graphnosis", "memory", "mcp"]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://graphnosis.com"
+"Connect AI" = "https://graphnosis.com/getting-started/connect-ai"
+Download = "https://graphnosis.com/download"
+
+# `hermes-graphnosis install` copies the plugin into the Hermes plugins dir.
+# NOTE: this is an installer console-script, NOT a Hermes memory-provider entry
+# point. Hermes 0.17.0 does not discover memory providers via entry points.
+[project.scripts]
+hermes-graphnosis = "hermes_graphnosis.installer:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# Ship the plugin folder's non-Python files (plugin.yaml, README) and the MCP
+# manifest as package data so the installer can copy a complete plugin folder.
+[tool.setuptools.package-data]
+"hermes_graphnosis" = ["graphnosis/*.yaml", "graphnosis/*.md", "data/*"]
